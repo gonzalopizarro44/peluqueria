@@ -1,6 +1,6 @@
 package com.peluqueria.backend.service.impl;
 
-import com.peluqueria.backend.model.usuarios;
+import com.peluqueria.backend.model.Usuario;
 import com.peluqueria.backend.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +14,15 @@ public class UsuarioService {
         this.usuariosRepo = usuariosRepo;
     }
 
-    public List<usuarios> obtenerTodos() {
+    public List<Usuario> obtenerTodos() {
         return usuariosRepo.findAll();
     }
 
-    public usuarios guardar(usuarios usuario) {
+    public Usuario guardar(Usuario usuario) {
         return usuariosRepo.save(usuario);
     }
 
-    public usuarios obtenerPorId(Long id) {
+    public Usuario obtenerPorId(Long id) {
         return usuariosRepo.findById(id).orElse(null);
     }
 

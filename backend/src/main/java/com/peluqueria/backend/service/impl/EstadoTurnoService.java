@@ -1,6 +1,6 @@
 package com.peluqueria.backend.service.impl;
 
-import com.peluqueria.backend.model.estados_turnos;
+import com.peluqueria.backend.model.EstadoTurno;
 import com.peluqueria.backend.repository.EstadoTurnoRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class EstadoTurnoService {
         this.estadosRepo = estadosRepo;
     }
 
-    public List<estados_turnos> obtenerTodos() {
+    public List<EstadoTurno> obtenerTodos() {
         return estadosRepo.findAll();
     }
 
-    public estados_turnos guardar(estados_turnos estado) {
+    public EstadoTurno guardar(EstadoTurno estado) {
         return estadosRepo.save(estado);
     }
 
-    public estados_turnos obtenerPorId(Long id) {
+    public EstadoTurno obtenerPorId(Long id) {
         return estadosRepo.findById(id).orElse(null);
     }
 
