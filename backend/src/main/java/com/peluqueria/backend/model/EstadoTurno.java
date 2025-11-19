@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class estados_turnos {
+public class EstadoTurno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class turnos {
+public class Turno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class turnos {
     // Relación con usuarios
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private usuarios usuario;
+    private Usuario usuario;
 
     // Relación con estados_turnos
     @ManyToOne
     @JoinColumn(name = "estado_turno_id", referencedColumnName = "id")
-    private estados_turnos estadoTurno;
+    private EstadoTurno estadoTurno;
 }
