@@ -2,6 +2,8 @@ package com.peluqueria.backend.mapper;
 
 import com.peluqueria.backend.dto.TurnoDTO;
 import com.peluqueria.backend.model.Turno;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class TurnoMapper {
 
@@ -10,10 +12,10 @@ public class TurnoMapper {
 
         TurnoDTO dto = new TurnoDTO();
         dto.setId(turno.getId());
-        dto.setFecha(turno.getFecha());
-        dto.setHora(turno.getHora());
-        dto.setUsuarioId(turno.getUsuario().getId());
-        dto.setEstado(EstadoTurnoMapper.toDTO(turno.getEstadoTurno()));
+        dto.setFecha(turno.getFecha() != null ? turno.getFecha().toString() : null);
+        dto.setHora(turno.getHora() != null ? turno.getHora().toString() : null);
+        if (turno.getBarbero() != null) dto.setBarberoId(turno.getBarbero().getId());
+        dto.setEstado(EstadoTurnoMapper.toDTO(turno.getEstado()));
 
         return dto;
     }
@@ -23,8 +25,8 @@ public class TurnoMapper {
 
         Turno turno = new Turno();
         turno.setId(dto.getId());
-        turno.setFecha(dto.getFecha());
-        turno.setHora(dto.getHora());
+        if (dto.getFecha() != null) turno.setFecha(LocalDate.parse(dto.getFecha()));
+        if (dto.getHora() != null) turno.setHora(LocalTime.parse(dto.getHora()));
         // usuario y barbero NO se asignan acá — se setean desde service
         return turno;
     }

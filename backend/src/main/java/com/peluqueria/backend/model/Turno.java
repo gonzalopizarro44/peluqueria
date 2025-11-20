@@ -1,7 +1,11 @@
 package com.peluqueria.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "turnos")
@@ -16,17 +20,31 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fecha;
+    // Barbero: referencia a usuarios.id (column barbero_id)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "barbero_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference   // evita recursión al serializar Usuario -> Turno -> Usuario...
+    private Usuario barbero;
 
-    private String hora;
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha;
 
-    // Relación con usuarios
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario usuario;
+    @Column(name = "hora", nullable = false)
+    private LocalTime hora;
 
-    // Relación con estados_turnos
-    @ManyToOne
-    @JoinColumn(name = "estado_turno_id", referencedColumnName = "id")
-    private EstadoTurno estadoTurno;
+    @Column(name = "dni_cliente")
+    private Integer dniCliente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_estado", referencedColumnName = "id", nullable = false)
+    private EstadoTurno estado;
+
+    @Column(name = "precio")
+    private java.math.BigDecimal precio;
+
+    @Column(name = "fecha_reserva")
+    private java.time.LocalDateTime fechaReserva;
+
+    @Column(name = "version")
+    private Integer version;
 }
